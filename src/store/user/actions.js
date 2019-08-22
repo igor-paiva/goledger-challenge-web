@@ -1,10 +1,8 @@
 import { Notify } from 'quasar';
 
 import auth from '../../services/authentication';
-import API from '../../services/api';
+import api from '../../services/api';
 import router from '../../router';
-
-const api = new API();
 
 const actions = {};
 
