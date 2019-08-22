@@ -3,15 +3,31 @@ import VueRouter from 'vue-router';
 
 import routes from './routes';
 
+import auth from '../services/authentication';
+
 Vue.use(VueRouter);
 
-export default function (/* { store, ssrContext } */) {
-  const Router = new VueRouter({
-    scrollBehavior: () => ({ x: 0, y: 0 }),
-    routes,
-    mode: process.env.VUE_ROUTER_MODE,
-    base: process.env.VUE_ROUTER_BASE,
-  });
+const Router = new VueRouter({
+  scrollBehavior: () => ({ y: 0 }),
+  routes,
+  mode: process.env.VUE_ROUTER_MODE,
+  base: process.env.VUE_ROUTER_BASE,
+});
 
-  return Router;
-}
+Router.beforeEach((to, from, next) => {
+  if (to.name === 'Login') {
+    if (auth.checkToken()) {
+      return next({ path: '/' });
+    }
+
+    return next();
+  }
+
+  if (!auth.checkToken()) {
+    return next({ name: 'Login' });
+  }
+
+  return next();
+});
+
+export default Router;
