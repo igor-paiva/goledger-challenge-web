@@ -1,7 +1,7 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/docked'),
+    component: () => import('layouts/default'),
     children: [
       {
         path: '',
