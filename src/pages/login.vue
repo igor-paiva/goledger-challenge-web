@@ -1,6 +1,10 @@
 <template>
   <q-page class="flex flex-center">
     <div class="align">
+      <h4 class="text-weight-ligth q-mt-none q-mb-md" align="center">
+        Entrar
+      </h4>
+
       <q-input
         v-model="userName"
         float-label="Nome de Usuário"
@@ -13,10 +17,10 @@
         placeholder="Digite sua senha" />
 
       <q-btn rounded
-        class="full-width q-mt-md"
+        class="glossy full-width q-mt-lg"
         color="primary"
         size="lg"
-        label="Entrar"
+        label="Acessar"
         @click="regularLogin()" />
     </div>
   </q-page>
