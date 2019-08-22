@@ -9,7 +9,7 @@ const CONFIG = {
   headers: { Accept: 'application/json' },
 };
 
-const mountConfig = () => {
+const addUserToken = () => {
   const token = auth.checkToken();
   const newConfig = Object.assign({}, CONFIG);
   const headers = Object.assign(
@@ -23,16 +23,10 @@ const mountConfig = () => {
   return newConfig;
 };
 
-export default class API {
-  get(path = '') {
-    this.a = path;
+export default {
+  get: (path = '') => axios.get(path, addUserToken())
+    .then(response => response.data),
 
-    return axios.get(path, mountConfig()).then(response => response.data);
-  }
-
-  post(path = '', data = {}) {
-    this.a = path;
-
-    return axios.post(path, data, mountConfig()).then(response => response.data);
-  }
-}
+  post: (path = '', data = {}) => axios.post(path, data, addUserToken())
+    .then(response => response.data),
+};
