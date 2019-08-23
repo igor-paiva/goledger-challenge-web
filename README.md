@@ -1,47 +1,40 @@
 # GoLedger Challenge
 
-In this challenge you will create a web interface to a blockchain application. This application is responsible to manage the pilots of air companies.
+This is a simple web page made to manage the pilots of air companies.
 
-## Instructions
+## Prerequisites
 
-- Fork the repository https://github.com/goledgerdev/goledger-challenge-web
+In this project was used Docker. To install and know more about see the [docs](https://docs.docker.com/).
 
-  - Fork it, do **NOT** clone it, since you will need to send us your forked repository
+## Installing
 
-- Create an web application using a framework that you wish.
-
-- Provide a page that the user will put their credentials to login.
-
-- If the login succeeds, show a list of pilots filtering by its air company name (field `operadorAereoRef`). The server does not have support to filters, you need to filter in the application.
-
-- You don't need to show all the fields of an aeronaut. The fields `nome`, `cpf`, `canac` are enough.
-
-- Improve your application with a beautiful UI.
-
-## Server
-
-The data are obtained using a rest server in this address: `ec2-18-223-158-118.us-east-2.compute.amazonaws.com:3000`
-
-The access is restrict by a authentication token. To obtain this token you have to do a POST request to `api/login` with username and passowrd. The following credentials are provided for you to use in this challenge:
+Clone the repository:
 
 ```
-username: user
-password: user
+git clone git@github.com:igor-paiva/goledger-challenge-web.git
 ```
 
-Here is the `curl` command for the login:
+With the cloned project and Docker installed. Go the the project root and create the container:
 
 ```
-curl -k -X POST  http://ec2-18-223-158-118.us-east-2.compute.amazonaws.com:3000/api/login \
--d 'username=user&password=user'
+docker-compose up -d
 ```
 
-To get the pilots list, you need to send a GET request to `/api/mainchannel/airlog-backend/Aeronauta?resolve=true`. The following example demonstrates how to execute this transaction:
+The **-d** flag is to run it on detached mode.
 
-```
-curl -k -X GET  'http://ec2-18-223-158-118.us-east-2.compute.amazonaws.com:3000/api/mainchannel/airlog-backend/Aeronauta?resolve=true' -H "Authorization: Bearer $TOKEN"
-```
+When it finishes the server will run on the localhost, on the **8080** port. To access use the following URL:
 
-Notice that the `$TOKEN` should be modified by the token obtained in login.
+[http://localhost:8080](http://localhost:8080)
 
-To complete the challenge, you must send us the link to your forked repository with the code of your application. Please, provide instructions to execute the code.
+## Using
+
+To use you will need to login with your account.
+
+Type the company name to filter the results.
+
+## Utilizado
+* [Quasar](https://quasar.dev) - Framework JavaScript
+* [Docker](https://docs.docker.com/) - Container manager
+
+## Author
+* Igor Batista Paiva - [https://github.com/igor-paiva](https://github.com/igor-paiva)
