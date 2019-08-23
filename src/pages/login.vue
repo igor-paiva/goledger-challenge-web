@@ -8,13 +8,28 @@
       <q-input
         v-model="userName"
         float-label="Nome de Usuário"
-        placeholder="Digite seu nome de usuário" />
+        placeholder="Digite seu nome de usuário">
+        <template v-slot:prepend>
+          <q-icon name="account_circle" color="primary" />
+        </template>
+      </q-input>
 
       <q-input
         v-model="password"
-        type="password"
         float-label="Senha"
-        placeholder="Digite sua senha" />
+        placeholder="Digite sua senha"
+        :type="isPwd ? 'password' : 'text'">
+        <template v-slot:prepend>
+          <q-icon name="lock" color="primary" />
+        </template>
+
+        <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd" />
+        </template>
+      </q-input>
 
       <q-btn rounded
         class="glossy full-width q-mt-lg"
@@ -48,6 +63,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      isPwd: true,
       userName: null,
       password: null,
     };
