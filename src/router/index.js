@@ -17,7 +17,7 @@ const Router = new VueRouter({
 Router.beforeEach((to, from, next) => {
   if (to.name === 'Login') {
     if (auth.checkToken()) {
-      return next({ path: '/' });
+      return next({ name: 'Dashboard' });
     }
 
     return next();
