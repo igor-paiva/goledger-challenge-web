@@ -53,7 +53,9 @@ export default {
     AirCompanySelector,
   },
   created() {
-    this.getAllPilots();
+    this.getAllPilots().then(() => {
+      this.filteredPilots = this.allPilots;
+    });
   },
   data() {
     return {
@@ -70,11 +72,17 @@ export default {
       getAllPilots: 'pilot/getList',
     }),
     filterPilots(companyName) {
-      this.filteredPilots = this.allPilots.filter((pilot) => {
-        const fromCompany = pilot.operadorAereoRef.nome === companyName;
+      console.log('company name: ', companyName);
 
-        return fromCompany;
-      });
+      if (!companyName) {
+        this.filteredPilots = this.allPilots;
+      } else {
+        this.filteredPilots = this.allPilots.filter((pilot) => {
+          const fromCompany = pilot.operadorAereoRef.nome === companyName;
+
+          return fromCompany;
+        });
+      }
     },
   },
 };
