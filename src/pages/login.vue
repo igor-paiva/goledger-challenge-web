@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="align">
-      <h4 class="text-weight-ligth q-mt-none q-mb-md" align="center">
+      <h4 class="text-weight-ligth text-secondary q-mt-none q-mb-md" align="center">
         Entrar
       </h4>
 

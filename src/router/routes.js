@@ -1,6 +1,7 @@
 const routes = [
   {
     path: '/',
+    name: 'Dashboard',
     component: () => import('layouts/default'),
     children: [
       {
