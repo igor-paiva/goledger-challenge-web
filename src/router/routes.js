@@ -1,11 +1,11 @@
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
     component: () => import('layouts/default'),
     children: [
       {
         path: '',
+        name: 'Dashboard',
         component: () => import('pages/Index'),
       },
     ],
