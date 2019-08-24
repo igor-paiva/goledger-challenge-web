@@ -1,9 +1,24 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MyLayout.vue'),
+    component: () => import('layouts/default'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      {
+        path: '',
+        name: 'Dashboard',
+        component: () => import('pages/Index'),
+      },
+    ],
+  },
+  {
+    path: '/login',
+    component: () => import('layouts/empty'),
+    children: [
+      {
+        path: '',
+        name: 'Login',
+        component: () => import('pages/login'),
+      },
     ],
   },
 ];
@@ -12,7 +27,7 @@ const routes = [
 if (process.env.MODE !== 'ssr') {
   routes.push({
     path: '*',
-    component: () => import('pages/Error404.vue'),
+    component: () => import('pages/Error404'),
   });
 }
 

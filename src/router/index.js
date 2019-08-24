@@ -3,24 +3,31 @@ import VueRouter from 'vue-router';
 
 import routes from './routes';
 
+import auth from '../services/authentication';
+
 Vue.use(VueRouter);
 
-/*
- * If not building with SSR mode, you can
- * directly export the Router instantiation
- */
+const Router = new VueRouter({
+  scrollBehavior: () => ({ y: 0 }),
+  routes,
+  mode: process.env.VUE_ROUTER_MODE,
+  base: process.env.VUE_ROUTER_BASE,
+});
 
-export default function (/* { store, ssrContext } */) {
-  const Router = new VueRouter({
-    scrollBehavior: () => ({ x: 0, y: 0 }),
-    routes,
+Router.beforeEach((to, from, next) => {
+  if (to.name === 'Login') {
+    if (auth.checkToken()) {
+      return next({ name: 'Dashboard' });
+    }
 
-    // Leave these as is and change from quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
-    mode: 'history',
-    base: process.env.VUE_ROUTER_BASE,
-  });
+    return next();
+  }
 
-  return Router;
-}
+  if (!auth.checkToken()) {
+    return next({ name: 'Login' });
+  }
+
+  return next();
+});
+
+export default Router;

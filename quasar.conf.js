@@ -1,5 +1,6 @@
 // Configuration for your app
-// https://quasar.dev/quasar-cli/quasar-conf-js
+
+const envparser = require('./config/envparser');
 
 module.exports = function (ctx) {
   return {
@@ -44,7 +45,11 @@ module.exports = function (ctx) {
         'QList',
         'QItem',
         'QItemSection',
-        'QItemLabel'
+        'QItemLabel',
+        'QInput',
+        'QCard',
+        'QCardSection',
+        'QCardActions'
       ],
 
       directives: [
@@ -53,7 +58,9 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'LocalStorage',
+        'Dialog'
       ]
     },
 
@@ -61,7 +68,8 @@ module.exports = function (ctx) {
 
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
+      vueRouterMode: 'history',
+      env: envparser(),
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
